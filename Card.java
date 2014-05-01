@@ -1,134 +1,112 @@
+/*
+CJ Pecor
+CS110
+Card Class
+*/
+
 public class Card 
 { 
-   public static int SPADES = 20; 
-   public static int CLUBS = 40; 
-   public static int DIAMONDS = 60; 
-   public static int HEARTS = 80; 
+//hold info for cards. Card types done in multiples of 20 to make it easier for card identification.
+   public final int SPADES = 20; 
+   public final int CLUBS = 40; 
+   public final int DIAMONDS = 60; 
+   public final int HEARTS = 80; 
    private int rank; 
    private int suit; 
-   private String stringSuit; 
-   private String stringRank; 
-     
-   public Card(int cardRank, int cardSuit) 
+   private String Suit; 
+   private String Rank; 
+   //Determines the rank and suit of a card.
+   //@param int cardVal the card's value.
+   public void findCard(int cardVal) 
    { 
-      rank = cardRank; 
-      suit = cardSuit; 
+      if (cardVal >= 22 && cardVal <= 34) 
+      { 
+         rank = cardVal - SPADES; 
+         suit = SPADES; 
+      } 
+        
+      else if (cardVal >= 42 && cardVal <= 54) 
+      { 
+         rank = cardVal - CLUBS; 
+         suit = CLUBS; 
+      } 
+        
+      else if (cardVal >= 62 && cardVal <= 74) 
+      { 
+         rank = cardVal - DIAMONDS; 
+         suit = DIAMONDS; 
+      } 
+        
+      else if (cardVal >= 82 && cardVal <= 94) 
+      { 
+         rank = cardVal - HEARTS; 
+         suit = HEARTS; 
+      } 
    } 
-     
+   //Sets the rank of a card. 
+   //@param int rank The card's rank.
    public void setRank(int rank) 
    { 
       this.rank = rank; 
    } 
-     
+   //Sets the suit of a card.
+   //@param in suit The card's suit.   
    public void setSuit(int suit) 
    { 
       this.suit = suit; 
    } 
-     
+   //Returns the card's rank.
+   //@return rank The card's rank.   
    public int getRank() 
    { 
       return rank; 
    } 
-     
+   //Returns the card's suit.
+   //@return suit The card's suit.   
    public int getSuit() 
    { 
       return suit; 
    } 
-     
+   //Returns the values of the card as a string (Ace of Diamonds, for example)
+   //@return Rank the card rank.
+   //@return Suit the card suit.   
    public String toString() 
    { 
       switch(suit) 
       { 
-         case 20: 
-            stringSuit = "Spades"; 
+         case SPADES: 
+            Suit = "Spades"; 
             break; 
-         case 40: 
-            stringSuit = "Clubs"; 
+         case CLUBS: 
+            Suit = "Clubs"; 
             break; 
-         case 60: 
-            stringSuit = "Diamonds"; 
+         case DIAMONDS: 
+            Suit = "Diamonds"; 
             break; 
-         case 80: 
-            stringSuit = "Hearts"; 
+         case HEARTS: 
+            Suit = "Hearts"; 
             break; 
-      } 
-        
+      }   
       if (rank >= 2 && rank <= 10) 
       { 
-         stringRank = String.valueOf(rank); 
-      } 
-        
+         Rank = String.valueOf(rank); 
+      }   
       else if (rank == 11) 
       { 
-         stringRank = "Jack"; 
-      } 
-        
+         Rank = "Jack"; 
+      }  
       else if (rank == 12) 
       { 
-         stringRank = "Queen"; 
-      } 
-        
+         Rank = "Queen"; 
+      }   
       else if (rank == 13) 
       { 
-         stringRank = "King"; 
-      } 
-        
+         Rank = "King"; 
+      }   
       else if (rank == 14) 
       { 
-         stringRank = "Ace"; 
-      } 
-        
-      return stringRank + " of " + stringSuit; 
-   } 
-     
-   public boolean greaterThan(Card otherCard) 
-   { 
-      boolean x; 
-        
-      if (rank > otherCard.rank) 
-      { 
-         x = true; 
-      } 
-        
-      else
-      { 
-         x = false; 
-      } 
-        
-      return x; 
-   } 
-     
-   public boolean equalTo(Card otherCard) 
-   { 
-      boolean x; 
-        
-      if (rank == otherCard.rank) 
-      { 
-         x = true; 
-      } 
-        
-      else
-      { 
-         x = false; 
-      } 
-        
-      return x; 
-   } 
-     
-   public boolean lessThan(Card otherCard) 
-   { 
-      boolean x; 
-        
-      if (rank < otherCard.rank) 
-      { 
-         x = true; 
-      } 
-        
-      else
-      { 
-         x = false; 
-      } 
-        
-      return x; 
+         Rank = "Ace"; 
+      }  
+      return Rank + " of " + Suit; 
    } 
 }

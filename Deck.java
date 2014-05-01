@@ -1,85 +1,75 @@
+/*
+CJ Pecor
+CS 110
+Deck class
+*/
+
 import java.util.Random; 
-import java.util.Arrays;
 import java.util.ArrayList; 
   
 public class Deck extends Card 
-{
-   public static int DECK_SIZE = 52; 
-   public static int HALF_DECK = 26; 
+{ 
+//Create array lists that hold the cards in the main deck that then gets shuffled and dealt out
+//to the decks of the two players. 
+   public static int DECK = 52; 
+   public static int PLAYER_DECK = 26; 
    public ArrayList<Integer> deck; 
-   public ArrayList<Integer> p1Deck; 
-   public ArrayList<Integer> p2Deck; 
-   public ArrayList<Integer> suits = {20, 40, 60, 80}; 
-   public ArrayList<Integer> ranks = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14}; 
+   public ArrayList<Integer> p1; 
+   public ArrayList<Integer> p2; 
+   public int [] suits = {20, 40, 60, 80}; 
+   public int [] ranks = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14}; 
    public Random rand; 
-     
-     
-   //make the deck, use for loop to add unique cards to that array 
-   public Deck(int cardRank, int cardSuit) 
+   //add cards to a deck
+   public Deck() 
    { 
-      super(cardRank, cardSuit); 
       rand = new Random(); 
-      deck = new ArrayList<>(); 
-      p1Deck = new ArrayList<>(); 
-      p2Deck = new ArrayList<>(); 
+      deck = new ArrayList<Integer>(); 
+      p1 = new ArrayList<Integer>(); 
+      p2 = new ArrayList<Integer>(); 
       for (int r = 0; r < ranks.length; r++) 
       { 
-         for (int s = 0; s < suits.length; s++) 
-         { 
-            deck.add(ranks[r] + suits[s]); 
-         } 
+         for (int s = 0; s < suits.length; s++)  
+            deck.add(ranks[r] + suits[s]);  
       } 
    } 
-     
+   //shuffles the deck  
    public void shuffle() 
    { 
       int randNum; 
       int temp; 
       Random r = new Random(); 
-      for (int i = 0; i < DECK_SIZE; i++) 
+      for (int i = 0; i < DECK; i++) 
       { 
-         randNum = r.nextInt(DECK_SIZE); 
+         randNum = r.nextInt(DECK); 
          temp = deck.get(i); 
-         deck.get(i) = deck.get(randNum); 
-         deck(randNum) = temp; 
+         deck.set(i, Integer.valueOf(deck.get(randNum))); 
+         deck.set(randNum, Integer.valueOf(temp)); 
       } 
    } 
-     
+   //Deals out the deck to the two players.  
    public void split() 
    { 
-      for (int i = 0; i < HALF_DECK; i++) 
-      { 
-         p1Deck[i] = deck[i]; 
-      } 
-        
-      for (int i = 0; i < HALF_DECK; i++) 
-      { 
-         p2Deck[i] = deck[i + HALF_DECK]; 
-      } 
+      for (int i = 0; i < PLAYER_DECK; i++) 
+         p1.add(deck.get(i)); 
+      for (int i = 0; i < PLAYER_DECK; i++)
+         p2.add(deck.get(i + PLAYER_DECK));
    } 
-     
-   public String getDeck() 
+   //Returns the main, unsplit deck
+   //@return deck The main deck. 
+   public ArrayList<Integer> getDeck() 
    { 
-      return Arrays.toString(deck); 
+      return deck; 
    } 
-     
-   public String getP1Deck() 
+  //Returns the deck belonging to player 1.
+  //@return p1 Player 1's deck.   
+   public ArrayList<Integer> getP1Deck() 
    { 
-      return Arrays.toString(p1Deck); 
+      return p1; 
    } 
-     
-   public String getP2Deck() 
+  //Returns the deck belonging to player 2.
+  //@return p2 Player 2's deck.
+   public ArrayList<Integer> getP2Deck() 
    { 
-      return Arrays.toString(p2Deck); 
-   } 
-  
-   public static void main(String [] args) 
-   { 
-      Deck d = new Deck(25, 45); 
-      d.shuffle(); 
-      d.split(); 
-      System.out.println(d.getDeck()); 
-      System.out.println(d.getP1Deck()); 
-      System.out.println(d.getP2Deck()); 
+      return p2; 
    } 
 }
